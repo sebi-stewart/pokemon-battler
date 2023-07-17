@@ -75,12 +75,11 @@ public class Move {
 
     @Override
     public String toString(){
-        return "Move{" +
+        return name + "{" +
                 "moveID=" + moveID +
-                ", name=" + name +
                 ", power=" + power +
                 ", accuracy=" + accuracy + "%" +
                 ", type=" + type +
-                ", category=" + category;
+                ", category=" + category + "}";
     }
 }

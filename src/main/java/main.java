@@ -12,7 +12,7 @@ public class main {
         List<Type> pokeType = Arrays.asList(Type.ELECTRIC);
         List<Move> moves = Arrays.asList(move0, move1, move2, move3);
         int[] stats = new int[]{35, 55, 30, 50, 40, 90};
-        Pokemon pikachu = new Pokemon(0, "pikachu", pokeType, stats, moves);
+        Pokemon pikachu = new Pokemon(0, "Pikachu", pokeType, stats, moves);
 
         System.out.println(pikachu);
     }

@@ -66,11 +66,10 @@ public class Pokemon {
 
     @Override
     public String toString(){
-        return "Pokemon{" +
+        return name + "{" +
                 "pokemonID=" + pokemonID +
-                ", name=" + name +
                 ", type=" + type +
                 ", baseStats=" + baseStats +
-                ", moves=" + moves;
+                ", moves=" + moves + "}";
     }
 }
