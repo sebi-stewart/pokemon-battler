@@ -15,5 +15,7 @@ public class main {
         Pokemon pikachu = new Pokemon(0, "Pikachu", pokeType, stats, moves);
 
         System.out.println(pikachu);
+
+
     }
 }
