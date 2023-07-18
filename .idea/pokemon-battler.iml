@@ -8,6 +8,13 @@
         <deploymentDescriptor name="hibernate.cfg.xml" url="file://$MODULE_DIR$/src/main/resources/hibernate.cfg.xml" />
       </configuration>
     </facet>
+    <facet type="jpa" name="JPA">
+      <configuration>
+        <setting name="validation-enabled" value="true" />
+        <datasource-mapping />
+        <naming-strategy-map />
+      </configuration>
+    </facet>
   </component>
   <component name="NewModuleRootManager" inherit-compiler-output="true">
     <exclude-output />
@@ -18,5 +25,26 @@
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="Hibernate 5.4.11-5.4.11" level="project" />
+    <orderEntry type="module-library" exported="">
+      <library>
+        <CLASSES>
+          <root url="file://$USER_HOME$/Downloads/mysql-connector-j-8.1.0" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES>
+          <root url="file://$USER_HOME$/Downloads/mysql-connector-j-8.1.0/src/build/java" />
+          <root url="file://$USER_HOME$/Downloads/mysql-connector-j-8.1.0/src/demo/java" />
+          <root url="file://$USER_HOME$/Downloads/mysql-connector-j-8.1.0/src/generated/java" />
+          <root url="file://$USER_HOME$/Downloads/mysql-connector-j-8.1.0/src/legacy/java" />
+          <root url="file://$USER_HOME$/Downloads/mysql-connector-j-8.1.0/src/main/core-api/java" />
+          <root url="file://$USER_HOME$/Downloads/mysql-connector-j-8.1.0/src/main/core-impl/java" />
+          <root url="file://$USER_HOME$/Downloads/mysql-connector-j-8.1.0/src/main/protocol-impl/java" />
+          <root url="file://$USER_HOME$/Downloads/mysql-connector-j-8.1.0/src/main/user-api/java" />
+          <root url="file://$USER_HOME$/Downloads/mysql-connector-j-8.1.0/src/main/user-impl/java" />
+          <root url="file://$USER_HOME$/Downloads/mysql-connector-j-8.1.0/src/test/java" />
+        </SOURCES>
+        <jarDirectory url="file://$USER_HOME$/Downloads/mysql-connector-j-8.1.0" recursive="false" />
+      </library>
+    </orderEntry>
   </component>
 </module>

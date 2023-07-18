@@ -1,17 +1,46 @@
+import javax.persistence.*;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
+@Entity
+@Table(name = "pokemon")
 public class Pokemon {
 
+    @Id
+    @Column(name = "pokemon_id", updatable = false, nullable = false)
     private int pokemonID;
 
+    @Column(name = "name")
     private String name;
 
-    private List<Type> type = new ArrayList<>();
+    @Column(name = "primary_type")
+    private Type primary_type;
 
-    private int[] baseStats = new int[6];
+    @Column(name = "secondary_type")
+    private Type secondary_type;
 
-    private List<Move> moves = new ArrayList<>();
+    @Column(name = "health")
+    private int health;
+    @Column(name = "attack")
+    private int attack;
+    @Column(name = "defense")
+    private int defense;
+    @Column(name = "special_attack")
+    private int special_attack;
+    @Column(name = "special_defense")
+    private int special_defense;
+    @Column(name = "speed")
+    private int speed;
+
+    @ManyToMany(cascade = {CascadeType.ALL})
+    @JoinTable(
+            name = "pokemon_move",
+            joinColumns = {@JoinColumn(name = "pokemon_id")},
+            inverseJoinColumns = {@JoinColumn(name = "move_id")}
+    )
+    private Set<Move> moves = new HashSet<>();
 
     public int getPokemonID() {
         return pokemonID;
@@ -29,38 +58,50 @@ public class Pokemon {
         this.name = name;
     }
 
-    public List<Type> getType() {
-        return type;
+    public Type[] getTypes() {
+        return new Type[] {primary_type, secondary_type};
     }
 
-    public void setType(List<Type> type) {
-        this.type = type;
+    public void setTypes(Type[] types) {
+        this.primary_type = types[0];
+        this.secondary_type = types[1];
     }
 
     public int[] getBaseStats() {
-        return baseStats;
+        return new int[] {health, attack, defense, special_attack, special_defense, speed};
     }
 
     public void setBaseStats(int[] baseStats) {
-        this.baseStats = baseStats;
+        this.health = baseStats[0];
+        this.attack = baseStats[1];
+        this.defense = baseStats[2];
+        this.special_attack = baseStats[3];
+        this.special_defense = baseStats[4];
+        this.speed = baseStats[5];
     }
 
-    public List<Move> getMoves() {
+    public Set<Move> getMoves() {
         return moves;
     }
 
-    public void setMoves(List<Move> moves) {
+    public void setMoves(Set<Move> moves) {
         this.moves = moves;
     }
 
     public Pokemon() {
     }
 
-    public Pokemon(int pokemonID, String pokemonName, List<Type> pokemonType, int[] baseStats, List<Move> moves) {
+    public Pokemon(int pokemonID, String pokemonName, Type[] types, int[] baseStats, Set<Move> moves) {
         this.pokemonID = pokemonID;
         this.name = pokemonName;
-        this.type = pokemonType;
-        this.baseStats = baseStats;
+        this.primary_type = types[0];
+        this.secondary_type = types[1];
+        this.health = baseStats[0];
+        this.attack = baseStats[1];
+        this.defense = baseStats[2];
+        this.special_attack = baseStats[3];
+        this.special_defense = baseStats[4];
+        this.speed = baseStats[5];
         this.moves = moves;
     }
 
@@ -68,8 +109,10 @@ public class Pokemon {
     public String toString(){
         return name + "{" +
                 "pokemonID=" + pokemonID +
-                ", type=" + type +
-                ", baseStats=" + baseStats +
+                ", type={" + primary_type + ", " + secondary_type + "}" +
+                ", baseStats={" + health +", " +  attack +", " +
+                defense + special_attack + ", " +
+                special_defense + speed + "}" +
                 ", moves=" + moves + "}";
     }
 }
