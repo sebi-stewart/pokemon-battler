@@ -112,9 +112,9 @@ public class Pokemon {
         return name + "{" +
                 "pokemonID=" + pokemonID +
                 ", type={" + primary_type + ", " + secondary_type + "}" +
-                ", baseStats={" + health +", " +  attack +", " +
-                defense + special_attack + ", " +
-                special_defense + speed + "}" +
+                ", baseStats={" + health + ", " +  attack + ", " +
+                defense + ", " + special_attack + ", " +
+                special_defense + ", " + speed + "}" +
                 ", moves=" + moves + "}";
     }
 }
