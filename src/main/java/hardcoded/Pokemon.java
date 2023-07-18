@@ -1,7 +1,7 @@
+package hardcoded;
+
 import javax.persistence.*;
-import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -15,9 +15,11 @@ public class Pokemon {
     @Column(name = "name")
     private String name;
 
+    @Enumerated(EnumType.STRING)
     @Column(name = "primary_type")
     private Type primary_type;
 
+    @Enumerated(EnumType.STRING)
     @Column(name = "secondary_type")
     private Type secondary_type;
 

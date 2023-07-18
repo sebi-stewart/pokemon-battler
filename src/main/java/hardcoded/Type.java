@@ -1,3 +1,5 @@
+package hardcoded;
+
 public enum Type {
     NORMAL,
     FIGHTING,

@@ -1,16 +1,36 @@
+package hardcoded;
+
+import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
+
+@Entity
+@Table(name = "moves")
 public class Move {
 
+    @Id
+    @Column(name = "move_id", updatable = false, nullable = false)
     private int moveID;
 
+    @Column(name = "name")
     private String name;
 
+    @Column(name = "move_power")
     private int power;
 
+    @Column(name = "accuracy")
     private int accuracy;
 
+    @Enumerated(EnumType.STRING)
+    @Column(name = "type_id")
     private Type type;
 
+    @Enumerated(EnumType.STRING)
+    @Column (name = "category_id")
     private MoveCategory category;
+
+    @ManyToMany(mappedBy = "moves")
+    private Set<Pokemon> pokemon = new HashSet<>();
 
     public int getMoveID() {
         return moveID;

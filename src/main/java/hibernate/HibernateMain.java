@@ -3,6 +3,8 @@ package hibernate;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 
+import hardcoded.*;
+
 /**
  * This class contains the functions to access and modify the database
  * @author Sebastian Stewart
@@ -24,5 +26,9 @@ public class HibernateMain {
         } finally {
             session.close();
         }
+    }
+
+    public static Pokemon createPokemon(){
+        return null;
     }
 }

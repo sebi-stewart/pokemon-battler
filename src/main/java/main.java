@@ -1,8 +1,11 @@
+import hardcoded.Move;
+import hardcoded.MoveCategory;
+import hardcoded.Pokemon;
+import hardcoded.Type;
 import hibernate.HibernateMain;
 
 import java.util.Arrays;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 public class main {

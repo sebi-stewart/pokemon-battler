@@ -1,2 +1,2 @@
-# Pokemon-battler
-A small project to create a text based, Pokemon showdown type of Pokemon battler.
+# hardcoded.Pokemon-battler
+A small project to create a text based, hardcoded.Pokemon showdown type of hardcoded.Pokemon battler.
