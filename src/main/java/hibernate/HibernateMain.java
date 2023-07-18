@@ -35,7 +35,7 @@ public class HibernateMain {
         Pokemon p1 = new Pokemon();
         try {
             session.beginTransaction();
-            p1.setPokemonID(pokemonID);
+            p1.setPokemonID((short) pokemonID);
             p1.setName(pokemonName);
             p1.setTypes(types);
             p1.setBaseStats(baseStats);
@@ -59,10 +59,10 @@ public class HibernateMain {
         Move m1 = new Move();
         try {
             session.beginTransaction();
-            m1.setMoveID(moveID);
+            m1.setMoveID((short) moveID);
             m1.setName(name);
-            m1.setPower(power);
-            m1.setAccuracy(accuracy);
+            m1.setPower((short) power);
+            m1.setAccuracy((byte) accuracy);
             m1.setType(type);
             m1.setCategory(category);
 

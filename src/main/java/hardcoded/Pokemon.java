@@ -10,7 +10,7 @@ public class Pokemon {
 
     @Id
     @Column(name = "pokemon_id", updatable = false, nullable = false)
-    private int pokemonID;
+    private short pokemonID;
 
     @Column(name = "name")
     private String name;
@@ -24,17 +24,17 @@ public class Pokemon {
     private Type secondary_type;
 
     @Column(name = "health")
-    private int health;
+    private short health;
     @Column(name = "attack")
-    private int attack;
+    private short attack;
     @Column(name = "defense")
-    private int defense;
+    private short defense;
     @Column(name = "special_attack")
-    private int special_attack;
+    private short special_attack;
     @Column(name = "special_defense")
-    private int special_defense;
+    private short special_defense;
     @Column(name = "speed")
-    private int speed;
+    private short speed;
 
     @ManyToMany(cascade = {CascadeType.ALL})
     @JoinTable(
@@ -44,11 +44,11 @@ public class Pokemon {
     )
     private Set<Move> moves = new HashSet<>();
 
-    public int getPokemonID() {
+    public short getPokemonID() {
         return pokemonID;
     }
 
-    public void setPokemonID(int pokemonID) {
+    public void setPokemonID(short pokemonID) {
         this.pokemonID = pokemonID;
     }
 
@@ -69,17 +69,17 @@ public class Pokemon {
         this.secondary_type = types[1];
     }
 
-    public int[] getBaseStats() {
-        return new int[] {health, attack, defense, special_attack, special_defense, speed};
+    public short[] getBaseStats() {
+        return new short[] {health, attack, defense, special_attack, special_defense, speed};
     }
 
     public void setBaseStats(int[] baseStats) {
-        this.health = baseStats[0];
-        this.attack = baseStats[1];
-        this.defense = baseStats[2];
-        this.special_attack = baseStats[3];
-        this.special_defense = baseStats[4];
-        this.speed = baseStats[5];
+        this.health = (short) baseStats[0];
+        this.attack = (short) baseStats[1];
+        this.defense = (short) baseStats[2];
+        this.special_attack = (short) baseStats[3];
+        this.special_defense = (short) baseStats[4];
+        this.speed = (short) baseStats[5];
     }
 
     public Set<Move> getMoves() {
@@ -94,16 +94,16 @@ public class Pokemon {
     }
 
     public Pokemon(int pokemonID, String pokemonName, Type[] types, int[] baseStats, Set<Move> moves) {
-        this.pokemonID = pokemonID;
+        this.pokemonID = (short) pokemonID;
         this.name = pokemonName;
         this.primary_type = types[0];
         this.secondary_type = types[1];
-        this.health = baseStats[0];
-        this.attack = baseStats[1];
-        this.defense = baseStats[2];
-        this.special_attack = baseStats[3];
-        this.special_defense = baseStats[4];
-        this.speed = baseStats[5];
+        this.health = (short) baseStats[0];
+        this.attack = (short) baseStats[1];
+        this.defense = (short) baseStats[2];
+        this.special_attack = (short) baseStats[3];
+        this.special_defense = (short) baseStats[4];
+        this.speed = (short) baseStats[5];
         this.moves = moves;
     }
 

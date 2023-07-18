@@ -10,16 +10,16 @@ public class Move {
 
     @Id
     @Column(name = "move_id", updatable = false, nullable = false)
-    private int moveID;
+    private short moveID;
 
     @Column(name = "name")
     private String name;
 
     @Column(name = "move_power")
-    private int power;
+    private short power;
 
     @Column(name = "accuracy")
-    private int accuracy;
+    private byte accuracy;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "type_id")
@@ -32,11 +32,11 @@ public class Move {
     @ManyToMany(mappedBy = "moves")
     private Set<Pokemon> pokemon = new HashSet<>();
 
-    public int getMoveID() {
+    public short getMoveID() {
         return moveID;
     }
 
-    public void setMoveID(int moveID) {
+    public void setMoveID(short moveID) {
         this.moveID = moveID;
     }
 
@@ -48,19 +48,19 @@ public class Move {
         this.name = name;
     }
 
-    public int getPower() {
+    public short getPower() {
         return power;
     }
 
-    public void setPower(int power) {
+    public void setPower(short power) {
         this.power = power;
     }
 
-    public int getAccuracy() {
+    public byte getAccuracy() {
         return accuracy;
     }
 
-    public void setAccuracy(int accuracy) {
+    public void setAccuracy(byte accuracy) {
         this.accuracy = accuracy;
     }
 
@@ -84,7 +84,7 @@ public class Move {
 
     }
 
-    public Move(int moveID, String name, int power, int accuracy, Type type, MoveCategory category){
+    public Move(short moveID, String name, short power, byte accuracy, Type type, MoveCategory category){
         this.moveID = moveID;
         this.name = name;
         this.power = power;
