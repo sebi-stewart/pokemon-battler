@@ -15,7 +15,7 @@ public class main {
         //HibernateMain.deletePokemon(94);
         //HibernateMain.deleteMove(247);
 
-        HibernateMain.assignMove(94, 86);
+        // HibernateMain.rescindMove(94, 86);
     }
 
     public static void createGengar(){

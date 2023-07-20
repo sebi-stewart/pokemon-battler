@@ -344,4 +344,43 @@ public class HibernateMain {
         return baseMon;
     }
 
+    public static Pokemon rescindMove(int pokemonID, int moveID){
+        Pokemon baseMon = getPokemon(pokemonID);
+        Move oldMove = getMove(moveID);
+        return rescindMove(baseMon, oldMove);
+    }
+
+    public static Pokemon rescindMove(Pokemon baseMon, int moveID){
+        Move oldMove = getMove(moveID);
+        return rescindMove(baseMon, oldMove);
+    }
+
+    public static Pokemon rescindMove(int pokemonID, Move oldMove){
+        Pokemon baseMon = getPokemon(pokemonID);
+        return rescindMove(baseMon, oldMove);
+    }
+
+    public static Pokemon rescindMove(Pokemon baseMon, Move oldMove){
+        if (baseMon==null || oldMove==null){return null;}
+
+        if(!(baseMon.rescindMove(oldMove))){
+            System.out.println("Missing Error: Move=" + oldMove + " is not contained in Pokemon=" + baseMon);return null;}
+
+        Session session = HibernateUtil.getSessionFactory().openSession();
+
+        try {
+            session.beginTransaction();
+
+            session.update(baseMon);
+            session.getTransaction().commit();
+        } catch (HibernateException e) {
+            if(session!=null) session.getTransaction().rollback();
+            e.printStackTrace();
+        } finally {
+            assert session != null;
+            session.close();
+        }
+        return baseMon;
+    }
+
 }

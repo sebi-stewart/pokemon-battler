@@ -90,14 +90,21 @@ public class Pokemon {
         this.moves = moves;
     }
 
-    public boolean addMove(Move move){if (!(isPresent(move))){ moves.add(move); return true;} return false;}
+    public boolean addMove(Move move){if (isPresent(move)==null){ moves.add(move); return true;} return false;}
 
-    public boolean isPresent(Move newMove){
+    public boolean rescindMove(Move move) {
+        Move remover = isPresent(move);
+        if (remover!=null){
+            return moves.remove(remover);
+        } return false;
+    }
+
+    public Move isPresent(Move newMove){
         for (Move m1 : moves){
             if (newMove.compareMove(m1)){
-                return true;
+                return m1;
             }
-        } return false;
+        } return null;
     }
 
     public Pokemon() {
