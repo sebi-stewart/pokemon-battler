@@ -301,4 +301,42 @@ public class HibernateMain {
         }
     }
 
+    public static Pokemon assignMove(int pokemonID, int moveID){
+        Pokemon baseMon = getPokemon(pokemonID);
+        Move newMove = getMove(moveID);
+        return assignMove(baseMon, newMove);
+    }
+
+    public static Pokemon assignMove(Pokemon baseMon, int moveID){
+        Move newMove = getMove(moveID);
+        return assignMove(baseMon, newMove);
+    }
+
+    public static Pokemon assignMove(int pokemonID, Move newMove){
+        Pokemon baseMon = getPokemon(pokemonID);
+        return assignMove(baseMon, newMove);
+    }
+
+    public static Pokemon assignMove(Pokemon baseMon, Move newMove){
+        if (baseMon==null || newMove==null){return null;}
+
+        Session session = HibernateUtil.getSessionFactory().openSession();
+
+        try {
+            session.beginTransaction();
+
+            baseMon.addMove(newMove);
+
+            session.update(baseMon);
+            session.getTransaction().commit();
+        } catch (HibernateException e) {
+            if(session!=null) session.getTransaction().rollback();
+            e.printStackTrace();
+        } finally {
+            assert session != null;
+            session.close();
+        }
+        return baseMon;
+    }
+
 }

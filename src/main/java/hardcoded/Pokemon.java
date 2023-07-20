@@ -90,6 +90,8 @@ public class Pokemon {
         this.moves = moves;
     }
 
+    public void addMove(Move move){if (!moves.contains(move)) {moves.add(move);}}
+
 
     public Pokemon() {
     }
@@ -111,11 +113,23 @@ public class Pokemon {
     @Override
     public String toString(){
         return name + "{" +
+                "pokemonID=" + pokemonID + "}";
+    }
+
+    public String longString(boolean show_moves){
+        if (show_moves){
+        return name + "{" +
                 "pokemonID=" + pokemonID +
                 ", type={" + primary_type + ", " + secondary_type + "}" +
                 ", baseStats={" + health + ", " +  attack + ", " +
                 defense + ", " + special_attack + ", " +
                 special_defense + ", " + speed + "}" +
-                ", moves=" + moves + "}";
+                ", moves=" + moves + "}";}
+        return name + "{" +
+                "pokemonID=" + pokemonID +
+                ", type={" + primary_type + ", " + secondary_type + "}" +
+                ", baseStats={" + health + ", " +  attack + ", " +
+                defense + ", " + special_attack + ", " +
+                special_defense + ", " + speed + "}" + "}";
     }
 }

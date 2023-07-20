@@ -10,10 +10,10 @@ public class main {
 
         HibernateMain.initialConnection();
 
-        //createGengar();
+        System.out.println(HibernateMain.getPokemon(22));
 
         //HibernateMain.deletePokemon(94);
-        HibernateMain.deleteMove(247);
+        //HibernateMain.deleteMove(247);
     }
 
     public static void createGengar(){
