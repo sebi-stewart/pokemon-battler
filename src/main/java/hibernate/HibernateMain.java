@@ -54,7 +54,7 @@ public class HibernateMain {
 
     }
 
-    public static Move createMove (int moveID, String name, int power, int accuracy, Type type, MoveCategory category){
+    public static Move createMove (int moveID, String name, int power, int accuracy, Type type, MoveCategory category, StatusChanges statusEffect, int statusChance){
         Session session = HibernateUtil.getSessionFactory().openSession();
         Move m1 = new Move();
         try {
@@ -65,6 +65,8 @@ public class HibernateMain {
             m1.setAccuracy((byte) accuracy);
             m1.setType(type);
             m1.setCategory(category);
+            m1.setStatusEffect(statusEffect);
+            m1.setStatusChance((byte) statusChance);
 
             session.save(m1);
             session.getTransaction().commit();

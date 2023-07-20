@@ -10,10 +10,10 @@ public class main {
 
         HibernateMain.initialConnection();
 
-        Move move0 = HibernateMain.createMove(85, "Thunderbolt", 90, 100, Type.ELECTRIC, MoveCategory.SPECIAL);
-        Move move1 = HibernateMain.createMove(9, "Thunder Punch", 75, 100, Type.ELECTRIC, MoveCategory.PHYSICAL);
-        Move move2 = HibernateMain.createMove(87, "Thunder", 110, 70, Type.ELECTRIC, MoveCategory.SPECIAL);
-        Move move3 = HibernateMain.createMove(86, "Thunder Wave", 0, 90, Type.ELECTRIC, MoveCategory.STATUS);
+        Move move0 = HibernateMain.createMove(85, "Thunderbolt", 90, 100, Type.ELECTRIC, MoveCategory.SPECIAL, StatusChanges.PARALYSE, 10);
+        Move move1 = HibernateMain.createMove(9, "Thunder Punch", 75, 100, Type.ELECTRIC, MoveCategory.PHYSICAL, StatusChanges.PARALYSE, 10);
+        Move move2 = HibernateMain.createMove(87, "Thunder", 110, 70, Type.ELECTRIC, MoveCategory.SPECIAL, StatusChanges.PARALYSE, 30);
+        Move move3 = HibernateMain.createMove(86, "Thunder Wave", 0, 90, Type.ELECTRIC, MoveCategory.STATUS, StatusChanges.PARALYSE, 100);
 
         Type[] pokeType = {Type.ELECTRIC, null};
         Set<Move> moves = new HashSet<>(Arrays.asList(move0, move1, move2, move3));

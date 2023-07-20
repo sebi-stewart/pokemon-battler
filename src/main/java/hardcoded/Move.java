@@ -22,12 +22,18 @@ public class Move {
     private byte accuracy;
 
     @Enumerated(EnumType.STRING)
-    @Column(name = "type_id")
+    @Column(name = "type")
     private Type type;
 
     @Enumerated(EnumType.STRING)
-    @Column (name = "category_id")
+    @Column (name = "category")
     private MoveCategory category;
+
+    @Column (name = "status_effect")
+    private StatusChanges statusEffect;
+
+    @Column (name = "status_chance")
+    private byte statusChance;
 
     @ManyToMany(mappedBy = "moves")
     private Set<Pokemon> pokemon = new HashSet<>();
@@ -80,17 +86,43 @@ public class Move {
         this.category = category;
     }
 
+    public StatusChanges getStatusEffect() {
+        return statusEffect;
+    }
+
+    public void setStatusEffect(StatusChanges statusEffect) {
+        this.statusEffect = statusEffect;
+    }
+
+    public byte getStatusChance() {
+        return statusChance;
+    }
+
+    public void setStatusChance(byte statusChance) {
+        this.statusChance = statusChance;
+    }
+
+    public Set<Pokemon> getPokemon() {
+        return pokemon;
+    }
+
+    public void setPokemon(Set<Pokemon> pokemon) {
+        this.pokemon = pokemon;
+    }
+
     public Move(){
 
     }
 
-    public Move(short moveID, String name, short power, byte accuracy, Type type, MoveCategory category){
+    public Move(short moveID, String name, int power, int accuracy, Type type, MoveCategory category, StatusChanges statusEffect, int statusChance){
         this.moveID = moveID;
         this.name = name;
-        this.power = power;
-        this.accuracy = accuracy;
+        this.power = (short) power;
+        this.accuracy = (byte) accuracy;
         this.type = type;
         this.category = category;
+        this.statusEffect = statusEffect;
+        this.statusChance = (byte) statusChance;
     }
 
     @Override
@@ -100,6 +132,9 @@ public class Move {
                 ", power=" + power +
                 ", accuracy=" + accuracy + "%" +
                 ", type=" + type +
-                ", category=" + category + "}";
+                ", category=" + category +
+                ", status_effect=" + statusEffect +
+                ", status_chance=" + statusChance +
+                "}";
     }
 }
