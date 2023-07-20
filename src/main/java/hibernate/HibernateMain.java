@@ -137,4 +137,80 @@ public class HibernateMain {
         }
         return result;
     }
+
+    public static Pokemon updatePokemon(int pokemonID, String pokemonName, Type[] types, int[] baseStats){
+        Pokemon baseMon = getPokemon(pokemonID);
+        if (baseMon==null) {return null;}
+
+        if (pokemonName==null){pokemonName=baseMon.getName();}
+        if (types==null){types=baseMon.getTypes();}
+        if (baseStats==null){
+            short[] oldStats=baseMon.getBaseStats();
+            int[] newStats = new int[6];
+            for (byte i=0; i<6; i++ ){
+                newStats[i]=oldStats[i];
+            }
+            baseStats=newStats;
+        }
+
+        Session session = HibernateUtil.getSessionFactory().openSession();
+
+        try {
+            session.beginTransaction();
+            baseMon.setName(pokemonName);
+            baseMon.setTypes(types);
+            baseMon.setBaseStats(baseStats);
+
+            session.update(baseMon);
+            session.getTransaction().commit();
+        } catch (HibernateException e) {
+            if(session!=null) session.getTransaction().rollback();
+            e.printStackTrace();
+        } finally {
+            assert session != null;
+            session.close();
+        }
+        return baseMon;
+
+    }
+
+    public static Move updateMove(int moveID, String name, int power, int accuracy, Type type, MoveCategory category, StatusChanges statusEffect, int statusChance){
+        Move baseMove = getMove(moveID);
+        if (baseMove==null) {return null;}
+
+        if (name==null){name=baseMove.getName();}
+        if (power==-1){power=baseMove.getPower();}
+        if (accuracy==-1){accuracy=baseMove.getAccuracy();}
+        if (type==null){type=baseMove.getType();}
+        if (category==null){category=baseMove.getCategory();}
+        if (statusEffect==null){statusEffect=baseMove.getStatusEffect();}
+        if (statusChance==-1){statusChance=baseMove.getStatusChance();}
+
+        Session session = HibernateUtil.getSessionFactory().openSession();
+
+        try {
+            session.beginTransaction();
+
+            //noinspection DuplicatedCode
+            baseMove.setName(name);
+            baseMove.setPower((short) power);
+            baseMove.setAccuracy((byte) accuracy);
+            baseMove.setType(type);
+            baseMove.setCategory(category);
+            baseMove.setStatusEffect(statusEffect);
+            baseMove.setStatusChance((byte) statusChance);
+
+            session.update(baseMove);
+            session.getTransaction().commit();
+        } catch (HibernateException e) {
+            if(session!=null) session.getTransaction().rollback();
+            e.printStackTrace();
+        } finally {
+            assert session != null;
+            session.close();
+        }
+        return baseMove;
+
+    }
+
 }

@@ -10,9 +10,12 @@ public class main {
 
         HibernateMain.initialConnection();
 
+        HibernateMain.updatePokemon(22, null, null, new int[] {35, 55, 30, 50, 40 ,90});
+        HibernateMain.updateMove(85, "Thunderbolt", 90, 100, Type.ELECTRIC, MoveCategory.SPECIAL, StatusChanges.PARALYSE, 10);
+
+
         // createPikachu()
         System.out.println(HibernateMain.getPokemon(22));
-        System.out.println(HibernateMain.getMove(87).getPokemon());
 
     }
 
