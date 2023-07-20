@@ -6,6 +6,8 @@ import org.hibernate.Session;
 import hardcoded.*;
 import org.hibernate.query.Query;
 
+import javax.persistence.PersistenceException;
+import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.List;
 import java.util.Set;
 
@@ -91,9 +93,9 @@ public class HibernateMain {
             session = HibernateUtil.getSessionFactory().openSession();
             session.beginTransaction();
 
-            Query getPokemon = session.createQuery(hql);
+            Query<Pokemon> getPokemonList = session.createQuery(hql);
 
-            List<Pokemon> results = getPokemon.list();
+            List<Pokemon> results = getPokemonList.list();
 
             session.getTransaction().commit();
 
@@ -105,6 +107,7 @@ public class HibernateMain {
             if(session!=null) session.getTransaction().rollback();
             e.printStackTrace();
         } finally {
+            assert session != null;
             session.close();
         }
         return result;
@@ -119,7 +122,7 @@ public class HibernateMain {
             session = HibernateUtil.getSessionFactory().openSession();
             session.beginTransaction();
 
-            Query getMove = session.createQuery(hql);
+            Query<Move> getMove = session.createQuery(hql);
 
             List<Move> results = getMove.list();
 
@@ -133,6 +136,7 @@ public class HibernateMain {
             if(session!=null) session.getTransaction().rollback();
             e.printStackTrace();
         } finally {
+            assert session != null;
             session.close();
         }
         return result;
@@ -320,12 +324,13 @@ public class HibernateMain {
     public static Pokemon assignMove(Pokemon baseMon, Move newMove){
         if (baseMon==null || newMove==null){return null;}
 
+        if(!(baseMon.addMove(newMove))){
+            System.out.println("Duplicate Error: Move=" + newMove + " is already contained in Pokemon=" + baseMon);return null;}
+
         Session session = HibernateUtil.getSessionFactory().openSession();
 
         try {
             session.beginTransaction();
-
-            baseMon.addMove(newMove);
 
             session.update(baseMon);
             session.getTransaction().commit();

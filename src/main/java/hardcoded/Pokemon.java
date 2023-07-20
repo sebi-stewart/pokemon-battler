@@ -90,8 +90,15 @@ public class Pokemon {
         this.moves = moves;
     }
 
-    public void addMove(Move move){if (!moves.contains(move)) {moves.add(move);}}
+    public boolean addMove(Move move){if (!(isPresent(move))){ moves.add(move); return true;} return false;}
 
+    public boolean isPresent(Move newMove){
+        for (Move m1 : moves){
+            if (newMove.compareMove(m1)){
+                return true;
+            }
+        } return false;
+    }
 
     public Pokemon() {
     }

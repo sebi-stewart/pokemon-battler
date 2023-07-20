@@ -2,6 +2,7 @@ package hardcoded;
 
 import javax.persistence.*;
 import java.util.HashSet;
+import java.util.Objects;
 import java.util.Set;
 
 @Entity
@@ -113,6 +114,13 @@ public class Move {
     public void removePokemon(Pokemon p){
         this.pokemon.remove(p);
         p.getMoves().remove(this);
+    }
+
+    public boolean compareMove(Move m1){
+        return this.moveID == m1.getMoveID() && Objects.equals(this.name, m1.getName()) &&
+                this.power == m1.getPower() && this.accuracy == m1.getAccuracy() &&
+                this.type == m1.getType() && this.category == m1.getCategory() &&
+                this.statusEffect == m1.getStatusEffect() && this.statusChance == m1.getStatusChance();
     }
 
     public Move(){
