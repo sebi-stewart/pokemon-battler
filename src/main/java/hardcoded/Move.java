@@ -35,7 +35,7 @@ public class Move {
     @Column (name = "status_chance")
     private byte statusChance;
 
-    @ManyToMany(mappedBy = "moves")
+    @ManyToMany(mappedBy = "moves", fetch=FetchType.EAGER)
     private Set<Pokemon> pokemon = new HashSet<>();
 
     public short getMoveID() {

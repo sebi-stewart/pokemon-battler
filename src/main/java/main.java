@@ -12,7 +12,7 @@ public class main {
 
         // createPikachu()
         System.out.println(HibernateMain.getPokemon(22));
-        System.out.println(HibernateMain.getMove(87));
+        System.out.println(HibernateMain.getMove(87).getPokemon());
 
     }
 
