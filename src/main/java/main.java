@@ -10,6 +10,13 @@ public class main {
 
         HibernateMain.initialConnection();
 
+        // createPikachu()
+        System.out.println(HibernateMain.getPokemon(22));
+        System.out.println(HibernateMain.getMove(87));
+
+    }
+
+    public static void createPikachu(){
         Move move0 = HibernateMain.createMove(85, "Thunderbolt", 90, 100, Type.ELECTRIC, MoveCategory.SPECIAL, StatusChanges.PARALYSE, 10);
         Move move1 = HibernateMain.createMove(9, "Thunder Punch", 75, 100, Type.ELECTRIC, MoveCategory.PHYSICAL, StatusChanges.PARALYSE, 10);
         Move move2 = HibernateMain.createMove(87, "Thunder", 110, 70, Type.ELECTRIC, MoveCategory.SPECIAL, StatusChanges.PARALYSE, 30);
@@ -21,7 +28,6 @@ public class main {
         Pokemon pikachu = HibernateMain.createPokemon(22, "Pikachu", pokeType, stats, moves);
 
         System.out.println(pikachu);
-
-
     }
+
 }

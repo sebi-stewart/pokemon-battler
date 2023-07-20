@@ -36,7 +36,7 @@ public class Pokemon {
     @Column(name = "speed")
     private short speed;
 
-    @ManyToMany(cascade = {CascadeType.ALL})
+    @ManyToMany(cascade = {CascadeType.ALL}, fetch=FetchType.EAGER)
     @JoinTable(
             name = "pokemon_move",
             joinColumns = {@JoinColumn(name = "pokemon_id")},

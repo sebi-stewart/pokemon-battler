@@ -4,7 +4,9 @@ import org.hibernate.HibernateException;
 import org.hibernate.Session;
 
 import hardcoded.*;
+import org.hibernate.query.Query;
 
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -79,5 +81,60 @@ public class HibernateMain {
             session.close();
         }
         return m1;
+    }
+
+    public static Pokemon getPokemon(int pokemonID){
+        String hql = "FROM Pokemon p WHERE p.pokemonID = ".concat(Integer.toString(pokemonID));
+        Pokemon result = null;
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        try {
+            session = HibernateUtil.getSessionFactory().openSession();
+            session.beginTransaction();
+
+            Query getPokemon = session.createQuery(hql);
+
+            List<Pokemon> results = getPokemon.list();
+
+            session.getTransaction().commit();
+
+            if (results.size() != 0){
+                result = results.get(0);
+            }
+
+        } catch (HibernateException e) {
+            if(session!=null) session.getTransaction().rollback();
+            e.printStackTrace();
+        } finally {
+            session.close();
+        }
+        return result;
+
+    }
+
+    public static Move getMove(int moveID){
+        String hql = "FROM Move m WHERE m.moveID = ".concat(Integer.toString(moveID));
+        Move result = null;
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        try {
+            session = HibernateUtil.getSessionFactory().openSession();
+            session.beginTransaction();
+
+            Query getMove = session.createQuery(hql);
+
+            List<Move> results = getMove.list();
+
+            session.getTransaction().commit();
+
+            if (results.size() != 0){
+                result = results.get(0);
+            }
+
+        } catch (HibernateException e) {
+            if(session!=null) session.getTransaction().rollback();
+            e.printStackTrace();
+        } finally {
+            session.close();
+        }
+        return result;
     }
 }
