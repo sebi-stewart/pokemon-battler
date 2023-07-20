@@ -10,13 +10,29 @@ public class main {
 
         HibernateMain.initialConnection();
 
+        //createGengar();
+
+        //HibernateMain.deletePokemon(94);
+        HibernateMain.deleteMove(247);
+    }
+
+    public static void createGengar(){
+        Move shadowBall = HibernateMain.createMove(247, "Shadow Ball", 80, 100, Type.GHOST, MoveCategory.SPECIAL, StatusChanges.SPD_DOWN, 20);
+
+        Type[] pokeType = {Type.GHOST, null};
+        Set<Move> moves = new HashSet<>(Arrays.asList(shadowBall));
+        int[] stats = new int[]{60, 65, 60, 130, 75, 110};
+
+        Pokemon gengar = HibernateMain.createPokemon(94, "Gengar", pokeType, stats, moves);
+    }
+
+    public void updateStuff(){
         HibernateMain.updatePokemon(22, null, null, new int[] {35, 55, 30, 50, 40 ,90});
         HibernateMain.updateMove(85, "Thunderbolt", 90, 100, Type.ELECTRIC, MoveCategory.SPECIAL, StatusChanges.PARALYSE, 10);
 
 
         // createPikachu()
         System.out.println(HibernateMain.getPokemon(22));
-
     }
 
     public static void createPikachu(){

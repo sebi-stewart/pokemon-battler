@@ -213,4 +213,92 @@ public class HibernateMain {
 
     }
 
+    public static void deletePokemon(int pokemonID){
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        try {
+            session = HibernateUtil.getSessionFactory().openSession();
+            session.beginTransaction();
+
+            Pokemon delPok = getPokemon(pokemonID);
+            session.delete(delPok);
+
+            session.getTransaction().commit();
+
+        } catch (HibernateException e) {
+            if (session != null) session.getTransaction().rollback();
+            e.printStackTrace();
+        } finally {
+            assert session != null;
+            session.close();
+        }
+
+    }
+
+    public static void deleteMove(int moveID){
+        Move delMove = getMove(moveID);
+
+        deleteAllRelations(delMove);
+
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        try {
+            session = HibernateUtil.getSessionFactory().openSession();
+            session.beginTransaction();
+
+            session.delete(delMove);
+
+            session.getTransaction().commit();
+
+        } catch (HibernateException e) {
+            if (session != null) session.getTransaction().rollback();
+            e.printStackTrace();
+        } finally {
+            assert session != null;
+            session.close();
+        }
+
+    }
+
+    public static void deleteAllRelations(Pokemon pokemon){
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        try{
+            session = HibernateUtil.getSessionFactory().openSession();
+            session.beginTransaction();
+
+            pokemon.setMoves(null);
+
+            session.merge(pokemon); // important
+
+            session.getTransaction().commit();
+        } catch (HibernateException e) {
+            if (session!=null) session.getTransaction().rollback();
+            e.printStackTrace();
+        } finally {
+            assert session != null;
+            session.close();
+        }
+    }
+
+    public static void deleteAllRelations(Move move){
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        try{
+            session = HibernateUtil.getSessionFactory().openSession();
+            session.beginTransaction();
+
+            for (Pokemon p : move.getPokemon()){
+                move.removePokemon(p);
+                session.update(p);
+            }
+
+            session.update(move); // important
+
+            session.getTransaction().commit();
+        } catch (HibernateException e) {
+            if (session!=null) session.getTransaction().rollback();
+            e.printStackTrace();
+        } finally {
+            assert session != null;
+            session.close();
+        }
+    }
+
 }

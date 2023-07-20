@@ -110,6 +110,11 @@ public class Move {
         this.pokemon = pokemon;
     }
 
+    public void removePokemon(Pokemon p){
+        this.pokemon.remove(p);
+        p.getMoves().remove(this);
+    }
+
     public Move(){
 
     }
