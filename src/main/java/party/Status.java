@@ -1,3 +1,5 @@
+package party;
+
 public enum Status {
     POISONED,
     BADLY_POISONED,

@@ -1,5 +1,7 @@
 package hardcoded;
 
+import party.PartyMon;
+
 import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
@@ -43,6 +45,9 @@ public class Pokemon {
             inverseJoinColumns = {@JoinColumn(name = "move_id")}
     )
     private Set<Move> moves = new HashSet<>();
+
+    @OneToMany(mappedBy="pokemonID")
+    private Set<PartyMon> partyMons;
 
     public short getPokemonID() {
         return pokemonID;

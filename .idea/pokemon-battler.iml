@@ -14,7 +14,9 @@
       <configuration>
         <setting name="validation-enabled" value="true" />
         <setting name="provider-name" value="Hibernate" />
-        <datasource-mapping />
+        <datasource-mapping>
+          <factory-entry name="pokemon-battler" value="22b63423-241d-47d5-a910-f82d5b2cb47c" />
+        </datasource-mapping>
         <naming-strategy-map />
       </configuration>
     </facet>
