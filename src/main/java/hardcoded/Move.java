@@ -22,6 +22,9 @@ public class Move {
     @Column(name = "accuracy")
     private byte accuracy;
 
+    @Column(name = "power_point")
+    private byte power_point;
+
     @Enumerated(EnumType.STRING)
     @Column(name = "type")
     private Type type;
@@ -69,6 +72,14 @@ public class Move {
 
     public void setAccuracy(byte accuracy) {
         this.accuracy = accuracy;
+    }
+
+    public byte getPower_point() {
+        return power_point;
+    }
+
+    public void setPower_point(byte power_point) {
+        this.power_point = power_point;
     }
 
     public Type getType() {
@@ -127,11 +138,12 @@ public class Move {
 
     }
 
-    public Move(short moveID, String name, int power, int accuracy, Type type, MoveCategory category, StatusChanges statusEffect, int statusChance){
+    public Move(short moveID, String name, int power, int accuracy, int power_point, Type type, MoveCategory category, StatusChanges statusEffect, int statusChance){
         this.moveID = moveID;
         this.name = name;
         this.power = (short) power;
         this.accuracy = (byte) accuracy;
+        this.power_point = (byte) power_point;
         this.type = type;
         this.category = category;
         this.statusEffect = statusEffect;
@@ -144,6 +156,7 @@ public class Move {
                 "moveID=" + moveID +
                 ", power=" + power +
                 ", accuracy=" + accuracy + "%" +
+                ", PP=" + power_point +
                 ", type=" + type +
                 ", category=" + category +
                 ", status_effect=" + statusEffect +

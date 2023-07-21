@@ -19,7 +19,7 @@ public class main {
     }
 
     public static void createGengar(){
-        Move shadowBall = HibernateMain.createMove(247, "Shadow Ball", 80, 100, Type.GHOST, MoveCategory.SPECIAL, StatusChanges.SPD_DOWN, 20);
+        Move shadowBall = HibernateMain.createMove(247, "Shadow Ball", 80, 100, 15, Type.GHOST, MoveCategory.SPECIAL, StatusChanges.SPD_DOWN, 20);
 
         Type[] pokeType = {Type.GHOST, null};
         Set<Move> moves = new HashSet<>(Arrays.asList(shadowBall));
@@ -30,7 +30,7 @@ public class main {
 
     public void updateStuff(){
         HibernateMain.updatePokemon(22, null, null, new int[] {35, 55, 30, 50, 40 ,90});
-        HibernateMain.updateMove(85, "Thunderbolt", 90, 100, Type.ELECTRIC, MoveCategory.SPECIAL, StatusChanges.PARALYSE, 10);
+        HibernateMain.updateMove(85, "Thunderbolt", 90, 100, 15, Type.ELECTRIC, MoveCategory.SPECIAL, StatusChanges.PARALYSE, 10);
 
 
         // createPikachu()
@@ -38,10 +38,10 @@ public class main {
     }
 
     public static void createPikachu(){
-        Move move0 = HibernateMain.createMove(85, "Thunderbolt", 90, 100, Type.ELECTRIC, MoveCategory.SPECIAL, StatusChanges.PARALYSE, 10);
-        Move move1 = HibernateMain.createMove(9, "Thunder Punch", 75, 100, Type.ELECTRIC, MoveCategory.PHYSICAL, StatusChanges.PARALYSE, 10);
-        Move move2 = HibernateMain.createMove(87, "Thunder", 110, 70, Type.ELECTRIC, MoveCategory.SPECIAL, StatusChanges.PARALYSE, 30);
-        Move move3 = HibernateMain.createMove(86, "Thunder Wave", 0, 90, Type.ELECTRIC, MoveCategory.STATUS, StatusChanges.PARALYSE, 100);
+        Move move0 = HibernateMain.createMove(85, "Thunderbolt", 90, 100, 15, Type.ELECTRIC, MoveCategory.SPECIAL, StatusChanges.PARALYSE, 10);
+        Move move1 = HibernateMain.createMove(9, "Thunder Punch", 75, 100, 15, Type.ELECTRIC, MoveCategory.PHYSICAL, StatusChanges.PARALYSE, 10);
+        Move move2 = HibernateMain.createMove(87, "Thunder", 110, 70, 10, Type.ELECTRIC, MoveCategory.SPECIAL, StatusChanges.PARALYSE, 30);
+        Move move3 = HibernateMain.createMove(86, "Thunder Wave", 0, 90, 20, Type.ELECTRIC, MoveCategory.STATUS, StatusChanges.PARALYSE, 100);
 
         Type[] pokeType = {Type.ELECTRIC, null};
         Set<Move> moves = new HashSet<>(Arrays.asList(move0, move1, move2, move3));

@@ -58,7 +58,7 @@ public class HibernateMain {
 
     }
 
-    public static Move createMove (int moveID, String name, int power, int accuracy, Type type, MoveCategory category, StatusChanges statusEffect, int statusChance){
+    public static Move createMove (int moveID, String name, int power, int accuracy, int power_point, Type type, MoveCategory category, StatusChanges statusEffect, int statusChance){
         Session session = HibernateUtil.getSessionFactory().openSession();
         Move m1 = new Move();
         try {
@@ -67,6 +67,7 @@ public class HibernateMain {
             m1.setName(name);
             m1.setPower((short) power);
             m1.setAccuracy((byte) accuracy);
+            m1.setPower_point((byte) power_point);
             m1.setType(type);
             m1.setCategory(category);
             m1.setStatusEffect(statusEffect);
@@ -156,14 +157,19 @@ public class HibernateMain {
             }
             baseStats=newStats;
         }
+        baseMon.setName(pokemonName);
+        baseMon.setTypes(types);
+        baseMon.setBaseStats(baseStats);
 
+        return updateMon(baseMon);
+
+    }
+
+    private static Pokemon updateMon(Pokemon baseMon) {
         Session session = HibernateUtil.getSessionFactory().openSession();
 
         try {
             session.beginTransaction();
-            baseMon.setName(pokemonName);
-            baseMon.setTypes(types);
-            baseMon.setBaseStats(baseStats);
 
             session.update(baseMon);
             session.getTransaction().commit();
@@ -175,16 +181,16 @@ public class HibernateMain {
             session.close();
         }
         return baseMon;
-
     }
 
-    public static Move updateMove(int moveID, String name, int power, int accuracy, Type type, MoveCategory category, StatusChanges statusEffect, int statusChance){
+    public static Move updateMove(int moveID, String name, int power, int accuracy, int power_point, Type type, MoveCategory category, StatusChanges statusEffect, int statusChance){
         Move baseMove = getMove(moveID);
         if (baseMove==null) {return null;}
 
         if (name==null){name=baseMove.getName();}
         if (power==-1){power=baseMove.getPower();}
         if (accuracy==-1){accuracy=baseMove.getAccuracy();}
+        if (power_point==-1){power_point=baseMove.getPower_point();}
         if (type==null){type=baseMove.getType();}
         if (category==null){category=baseMove.getCategory();}
         if (statusEffect==null){statusEffect=baseMove.getStatusEffect();}
@@ -199,6 +205,7 @@ public class HibernateMain {
             baseMove.setName(name);
             baseMove.setPower((short) power);
             baseMove.setAccuracy((byte) accuracy);
+            baseMove.setPower_point((byte) power_point);
             baseMove.setType(type);
             baseMove.setCategory(category);
             baseMove.setStatusEffect(statusEffect);
@@ -327,21 +334,7 @@ public class HibernateMain {
         if(!(baseMon.addMove(newMove))){
             System.out.println("Duplicate Error: Move=" + newMove + " is already contained in Pokemon=" + baseMon);return null;}
 
-        Session session = HibernateUtil.getSessionFactory().openSession();
-
-        try {
-            session.beginTransaction();
-
-            session.update(baseMon);
-            session.getTransaction().commit();
-        } catch (HibernateException e) {
-            if(session!=null) session.getTransaction().rollback();
-            e.printStackTrace();
-        } finally {
-            assert session != null;
-            session.close();
-        }
-        return baseMon;
+        return updateMon(baseMon);
     }
 
     public static Pokemon rescindMove(int pokemonID, int moveID){
@@ -366,21 +359,7 @@ public class HibernateMain {
         if(!(baseMon.rescindMove(oldMove))){
             System.out.println("Missing Error: Move=" + oldMove + " is not contained in Pokemon=" + baseMon);return null;}
 
-        Session session = HibernateUtil.getSessionFactory().openSession();
-
-        try {
-            session.beginTransaction();
-
-            session.update(baseMon);
-            session.getTransaction().commit();
-        } catch (HibernateException e) {
-            if(session!=null) session.getTransaction().rollback();
-            e.printStackTrace();
-        } finally {
-            assert session != null;
-            session.close();
-        }
-        return baseMon;
+        return updateMon(baseMon);
     }
 
 }
