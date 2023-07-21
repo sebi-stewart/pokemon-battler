@@ -3,6 +3,7 @@ import hibernate.HibernateMain;
 
 import java.util.Arrays;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 public class main {
@@ -22,7 +23,7 @@ public class main {
         Move shadowBall = HibernateMain.createMove(247, "Shadow Ball", 80, 100, 15, Type.GHOST, MoveCategory.SPECIAL, StatusChanges.SPD_DOWN, 20);
 
         Type[] pokeType = {Type.GHOST, null};
-        Set<Move> moves = new HashSet<>(Arrays.asList(shadowBall));
+        Set<Move> moves = new HashSet<>(List.of(shadowBall));
         int[] stats = new int[]{60, 65, 60, 130, 75, 110};
 
         Pokemon gengar = HibernateMain.createPokemon(94, "Gengar", pokeType, stats, moves);
