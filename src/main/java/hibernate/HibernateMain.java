@@ -5,9 +5,8 @@ import org.hibernate.Session;
 
 import hardcoded.*;
 import org.hibernate.query.Query;
+import party.*;
 
-import javax.persistence.PersistenceException;
-import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.List;
 import java.util.Set;
 
@@ -86,6 +85,30 @@ public class HibernateMain {
         return m1;
     }
 
+    public static PartyMon createPartyMon(int pokemonID, int level){
+        Session session = HibernateUtil.getSessionFactory().openSession();
+
+        Pokemon mon = getPokemon(pokemonID);
+        if (mon==null){return null;}
+
+        PartyMon p1 = new PartyMon(mon, level);
+        try {
+            session.beginTransaction();
+            p1.setPartyMonID(1);
+            p1.setNature(Nature.getRandomNature());
+
+            session.save(p1);
+            session.getTransaction().commit();
+        } catch (HibernateException e) {
+            if(session!=null) session.getTransaction().rollback();
+            e.printStackTrace();
+        } finally {
+            assert session != null;
+            session.close();
+        }
+        return p1;
+    }
+
     public static Pokemon getPokemon(int pokemonID){
         String hql = "FROM Pokemon p WHERE p.pokemonID = ".concat(Integer.toString(pokemonID));
         Pokemon result = null;
@@ -141,6 +164,35 @@ public class HibernateMain {
             session.close();
         }
         return result;
+    }
+
+    public static PartyMon getPartyMon(int partyMonID){
+        String hql = "FROM PartyMon p WHERE p.partyMonID = ".concat(Integer.toString(partyMonID));
+        PartyMon result = null;
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        try {
+            session = HibernateUtil.getSessionFactory().openSession();
+            session.beginTransaction();
+
+            Query<PartyMon> getPartyMonList = session.createQuery(hql);
+
+            List<PartyMon> results = getPartyMonList.list();
+
+            session.getTransaction().commit();
+
+            if (results.size() != 0){
+                result = results.get(0);
+            }
+
+        } catch (HibernateException e) {
+            if(session!=null) session.getTransaction().rollback();
+            e.printStackTrace();
+        } finally {
+            assert session != null;
+            session.close();
+        }
+        return result;
+
     }
 
     public static Pokemon updatePokemon(int pokemonID, String pokemonName, Type[] types, int[] baseStats){
@@ -221,6 +273,48 @@ public class HibernateMain {
             session.close();
         }
         return baseMove;
+
+    }
+
+    public static PartyMon updatePartyMon(int partyMonID, int pokemonID, int level, int currentHealth){
+        PartyMon partyMon = getPartyMon(partyMonID);
+        if (partyMon==null) {return null;}
+
+        Pokemon mon;
+
+        if (pokemonID==-1){
+            mon=partyMon.getPartyPokemon();
+        } else{
+            mon=getPokemon(pokemonID);
+        }
+        if (level==-1){level=partyMon.getLevel();}
+        if (currentHealth==-1){currentHealth=partyMon.getCurrentHealth();}
+
+        int health_dif = partyMon.getTotal_health() - currentHealth;
+
+        partyMon.setPartyPokemon(mon);
+        partyMon.setLevel((byte)level);
+        partyMon.setTotals();
+
+        int newCurrentHealth = partyMon.getTotal_health() - health_dif;
+
+        partyMon.setCurrentHealth((short)newCurrentHealth);
+
+        Session session = HibernateUtil.getSessionFactory().openSession();
+
+        try {
+            session.beginTransaction();
+
+            session.update(partyMon);
+            session.getTransaction().commit();
+        } catch (HibernateException e) {
+            if(session!=null) session.getTransaction().rollback();
+            e.printStackTrace();
+        } finally {
+            assert session != null;
+            session.close();
+        }
+        return partyMon;
 
     }
 
@@ -310,6 +404,28 @@ public class HibernateMain {
             assert session != null;
             session.close();
         }
+    }
+
+    public static void deletePartyMon(int partyMonID){
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        try {
+            session = HibernateUtil.getSessionFactory().openSession();
+            session.beginTransaction();
+
+            PartyMon delMon = getPartyMon(partyMonID);
+            session.delete(delMon);
+
+            session.getTransaction().commit();
+
+        } catch (HibernateException e) {
+            if (session != null) session.getTransaction().rollback();
+            e.printStackTrace();
+        } finally {
+            assert session != null;
+            session.close();
+        }
+
+
     }
 
     public static Pokemon assignMove(int pokemonID, int moveID){
