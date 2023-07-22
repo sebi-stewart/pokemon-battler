@@ -12,7 +12,9 @@ public class main {
 
         HibernateMain.initialConnection();
 
-//         deletePartyMon();
+        // createPartyMon();
+
+        System.out.println(HibernateMain.createParty(new int[]{5}));
     }
 
     public static void deletePartyMon(){

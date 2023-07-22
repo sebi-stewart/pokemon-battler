@@ -7,7 +7,9 @@ import hardcoded.*;
 import org.hibernate.query.Query;
 import party.*;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Objects;
 import java.util.Set;
 
 /**
@@ -95,6 +97,47 @@ public class HibernateMain {
         try {
             session.beginTransaction();
             p1.setPartyMonID(1);
+
+            session.save(p1);
+            session.getTransaction().commit();
+        } catch (HibernateException e) {
+            if(session!=null) session.getTransaction().rollback();
+            e.printStackTrace();
+        } finally {
+            assert session != null;
+            session.close();
+        }
+        return p1;
+    }
+
+    public static Party createParty(int[] partyMonIDs){
+        Set<PartyMon> partyMons = new HashSet<>();
+        PartyMon newMon;
+        Party p1 = new Party();
+
+        for (int id : partyMonIDs){
+            newMon = getPartyMon(id);
+            if (Objects.isNull(newMon)){
+                System.out.println("This party mon " + id + " does not exist");
+                return null;
+            } else if (!Objects.isNull(newMon.getMyParty())) {
+                System.out.println("This party mon " + newMon + " is assigned to a party");
+                return null;
+            }
+            partyMons.add(newMon);
+            newMon.setMyParty(p1);
+        }
+
+        p1.setPartyMons(partyMons);
+
+        Session session = HibernateUtil.getSessionFactory().openSession();
+
+        try {
+            session.beginTransaction();
+
+            for (PartyMon mon : partyMons){
+                session.merge(mon);
+            }
 
             session.save(p1);
             session.getTransaction().commit();

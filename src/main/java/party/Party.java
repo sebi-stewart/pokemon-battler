@@ -33,4 +33,12 @@ public class Party {
 
     public Party() {
     }
+
+    @Override
+    public String toString() {
+        return "Party{" +
+                "partyID=" + partyID +
+                ", partyMons=" + partyMons +
+                '}';
+    }
 }

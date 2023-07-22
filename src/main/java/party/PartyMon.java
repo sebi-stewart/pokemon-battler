@@ -61,6 +61,14 @@ public class PartyMon{
         this.partyMonID = partyMonID;
     }
 
+    public Party getMyParty() {
+        return myParty;
+    }
+
+    public void setMyParty(Party myParty) {
+        this.myParty = myParty;
+    }
+
     public Pokemon getPartyPokemon() {
         return partyPokemon;
     }
