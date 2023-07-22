@@ -21,6 +21,7 @@
 
         <mapping class="hardcoded.Pokemon" />
         <mapping class="hardcoded.Move" />
+        <mapping class="party.PartyMon" />
 
     </session-factory>
 </hibernate-configuration>
