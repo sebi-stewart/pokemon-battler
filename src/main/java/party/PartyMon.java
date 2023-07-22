@@ -9,7 +9,7 @@ import javax.persistence.*;
 public class PartyMon{
 
     @Id
-    @GeneratedValue (strategy = GenerationType.AUTO)
+    @GeneratedValue (strategy = GenerationType.IDENTITY)
     @Column(name = "party_mon_id", updatable = false, nullable = false)
     private int partyMonID;
 
@@ -205,6 +205,14 @@ public class PartyMon{
         return "PartyMon{" +
                 "partyMonID=" + partyMonID +
                 ", pokemonID=" + partyPokemon +
+                ", level=" + level +
+                '}';
+    }
+
+    public String longString(){
+        return "PartyMon{" +
+                "partyMonID=" + partyMonID +
+                ", pokemonID=" + partyPokemon.longString(false) +
                 ", level=" + level +
                 '}';
     }

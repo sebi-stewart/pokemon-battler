@@ -16,9 +16,10 @@ public class main {
     }
 
     public static void createPartyMon(){
-        PartyMon gengarP1 = HibernateMain.createPartyMon(94, 50);
+        PartyMon gengarP1 = HibernateMain.createPartyMon(94, 97);
 
-        System.out.println(gengarP1);
+        assert gengarP1 != null;
+        System.out.println(gengarP1.longString());
     }
 
 
