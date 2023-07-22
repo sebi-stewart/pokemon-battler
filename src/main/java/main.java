@@ -1,5 +1,6 @@
 import hardcoded.*;
 import hibernate.HibernateMain;
+import party.PartyMon;
 
 import java.util.Arrays;
 import java.util.HashSet;
@@ -11,12 +12,23 @@ public class main {
 
         HibernateMain.initialConnection();
 
-        //System.out.println(HibernateMain.getPokemon(94));
+        createPartyMon();
+    }
 
-        //HibernateMain.deletePokemon(94);
-        //HibernateMain.deleteMove(247);
+    public static void createPartyMon(){
+        PartyMon gengarP1 = HibernateMain.createPartyMon(94, 50);
 
-        // HibernateMain.rescindMove(94, 86);
+        System.out.println(gengarP1);
+    }
+
+
+    public static void deletePokemonMove(){
+        System.out.println(HibernateMain.getPokemon(94));
+
+        HibernateMain.deletePokemon(94);
+        HibernateMain.deleteMove(247);
+
+         HibernateMain.rescindMove(94, 86);
     }
 
     public static void createGengar(){
