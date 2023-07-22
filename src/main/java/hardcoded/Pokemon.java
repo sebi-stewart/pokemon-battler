@@ -46,8 +46,8 @@ public class Pokemon {
     )
     private Set<Move> moves = new HashSet<>();
 
-    @OneToMany(mappedBy="pokemonID")
-    private Set<PartyMon> partyMons;
+    @OneToMany(mappedBy= "partyPokemon")
+    private Set<PartyMon> partyMons = new HashSet<>();
 
     public short getPokemonID() {
         return pokemonID;
