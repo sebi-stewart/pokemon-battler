@@ -95,7 +95,6 @@ public class HibernateMain {
         try {
             session.beginTransaction();
             p1.setPartyMonID(1);
-            p1.setNature(Nature.getRandomNature());
 
             session.save(p1);
             session.getTransaction().commit();

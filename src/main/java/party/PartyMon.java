@@ -13,8 +13,9 @@ public class PartyMon{
     @Column(name = "party_mon_id", updatable = false, nullable = false)
     private int partyMonID;
 
-    @ManyToOne
-    @JoinColumn(name="pokemon_id", nullable = false)
+
+    @ManyToOne(targetEntity = Pokemon.class)
+    @JoinColumn(name="pokemon_id", referencedColumnName = "pokemon_id", nullable = false)
     private Pokemon partyPokemon;
 
     @Column(name = "level")
@@ -152,6 +153,7 @@ public class PartyMon{
         this.partyMonID = 1;
         this.partyPokemon = partyPokemon;
         this.level = (byte) level;
+        this.nature = Nature.getRandomNature();
         setTotals();
         this.currentHealth = total_health;
     }
