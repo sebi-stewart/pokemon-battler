@@ -13,6 +13,9 @@ public class PartyMon{
     @Column(name = "party_mon_id", updatable = false, nullable = false)
     private int partyMonID;
 
+    @ManyToOne(targetEntity = Party.class)
+    @JoinColumn(name="party_id", referencedColumnName = "party_id")
+    private Party myParty;
 
     @ManyToOne(targetEntity = Pokemon.class)
     @JoinColumn(name="pokemon_id", referencedColumnName = "pokemon_id", nullable = false)

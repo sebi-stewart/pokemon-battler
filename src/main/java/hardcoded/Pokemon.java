@@ -112,6 +112,14 @@ public class Pokemon {
         } return null;
     }
 
+    public Set<PartyMon> getPartyMons() {
+        return partyMons;
+    }
+
+    public void setPartyMons(Set<PartyMon> partyMons) {
+        this.partyMons = partyMons;
+    }
+
     public Pokemon() {
     }
 

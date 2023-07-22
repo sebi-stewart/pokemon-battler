@@ -12,7 +12,17 @@ public class main {
 
         HibernateMain.initialConnection();
 
-        createPartyMon();
+//         deletePartyMon();
+    }
+
+    public static void deletePartyMon(){
+        HibernateMain.deletePartyMon(3);
+    }
+
+    public static void getGengar(){
+        Pokemon gengar = HibernateMain.getPokemon(94);
+        System.out.println(gengar.longString(true));
+        System.out.println(gengar.getPartyMons());
     }
 
     public static void createPartyMon(){
