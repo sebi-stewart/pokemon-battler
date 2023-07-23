@@ -14,7 +14,15 @@ public class main {
 
         // createPartyMon();
 
-        System.out.println(HibernateMain.createParty(new int[]{5}));
+        getParty();
+    }
+
+    public static void getParty(){
+        System.out.println(HibernateMain.getParty(17));
+    }
+
+    public static void createParty(){
+        System.out.println(HibernateMain.createParty(new int[]{9,10}));
     }
 
     public static void deletePartyMon(){
@@ -28,7 +36,7 @@ public class main {
     }
 
     public static void createPartyMon(){
-        PartyMon gengarP1 = HibernateMain.createPartyMon(94, 97);
+        PartyMon gengarP1 = HibernateMain.createPartyMon(94, 30);
 
         assert gengarP1 != null;
         System.out.println(gengarP1.longString());

@@ -124,6 +124,7 @@ public class HibernateMain {
                 System.out.println("This party mon " + newMon + " is assigned to a party");
                 return null;
             }
+            System.out.println(newMon);
             partyMons.add(newMon);
             newMon.setMyParty(p1);
         }
@@ -136,7 +137,8 @@ public class HibernateMain {
             session.beginTransaction();
 
             for (PartyMon mon : partyMons){
-                session.merge(mon);
+                System.out.println(mon);
+                session.update(mon);
             }
 
             session.save(p1);
@@ -235,6 +237,34 @@ public class HibernateMain {
         }
         return result;
 
+    }
+
+    public static Party getParty(int partyID){
+        String hql = "FROM Party p WHERE p.partyID = ".concat(Integer.toString(partyID));
+        Party result = null;
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        try {
+            session = HibernateUtil.getSessionFactory().openSession();
+            session.beginTransaction();
+
+            Query<Party> getPartyList = session.createQuery(hql);
+
+            List<Party> results = getPartyList.list();
+
+            session.getTransaction().commit();
+
+            if (results.size() != 0){
+                result = results.get(0);
+            }
+
+        } catch (HibernateException e) {
+            if(session!=null) session.getTransaction().rollback();
+            e.printStackTrace();
+        } finally {
+            assert session != null;
+            session.close();
+        }
+        return result;
     }
 
     public static Pokemon updatePokemon(int pokemonID, String pokemonName, Type[] types, int[] baseStats){

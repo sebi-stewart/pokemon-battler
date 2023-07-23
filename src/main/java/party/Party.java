@@ -12,7 +12,7 @@ public class Party {
     @Column(name = "party_id", updatable = false, nullable = false)
     private int partyID;
 
-    @OneToMany(mappedBy= "partyPokemon", fetch=FetchType.EAGER)
+    @OneToMany(mappedBy= "myParty", fetch=FetchType.EAGER)
     private Set<PartyMon> partyMons = new HashSet<>();
 
     public int getPartyID() {
