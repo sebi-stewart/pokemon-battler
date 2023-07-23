@@ -1,5 +1,7 @@
 package hardcoded;
 
+import party.PartyMon;
+
 import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Objects;
@@ -41,6 +43,9 @@ public class Move {
 
     @ManyToMany(mappedBy = "moves", fetch=FetchType.EAGER)
     private Set<Pokemon> pokemon = new HashSet<>();
+
+    @ManyToMany(mappedBy = "moves", fetch=FetchType.EAGER)
+    private Set<PartyMon> partyMon = new HashSet<>();
 
     public short getMoveID() {
         return moveID;

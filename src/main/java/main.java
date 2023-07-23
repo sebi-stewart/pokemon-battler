@@ -14,15 +14,34 @@ public class main {
 
         // createPartyMon();
 
-        getParty();
+        // assignPartyMon();
+        // createPartyMon();
+
+        // getParty();
+
+        deleteParty();
+    }
+
+    public static void deleteParty(){
+        HibernateMain.deleteParty(18);
+    }
+
+    public static void assignPartyMon(){
+        PartyMon p1 = HibernateMain.getPartyMon(11);
+        PartyMon p2 = HibernateMain.getPartyMon(12);
+        PartyMon p3 = HibernateMain.getPartyMon(13);
+
+        Set<PartyMon> partyMons = new HashSet<PartyMon>(Arrays.asList(p1, p2, p3));
+
+        System.out.println(HibernateMain.updateParty(18, partyMons));
     }
 
     public static void getParty(){
-        System.out.println(HibernateMain.getParty(17));
+        System.out.println(HibernateMain.getParty(18));
     }
 
     public static void createParty(){
-        System.out.println(HibernateMain.createParty(new int[]{9,10}));
+        System.out.println(HibernateMain.createParty(new int[]{}));
     }
 
     public static void deletePartyMon(){

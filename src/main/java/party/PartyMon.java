@@ -1,8 +1,11 @@
 package party;
 
+import hardcoded.Move;
 import hardcoded.Pokemon;
 
 import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "party_mon")
@@ -52,6 +55,14 @@ public class PartyMon{
 
     @Column(name = "current_health")
     private short currentHealth;
+
+    @ManyToMany(cascade = { CascadeType.MERGE, CascadeType.PERSIST }, fetch=FetchType.EAGER)
+    @JoinTable(
+            name = "party_mon_move",
+            joinColumns = {@JoinColumn(name = "party_mon_id")},
+            inverseJoinColumns = {@JoinColumn(name = "move_id")}
+    )
+    private Set<Move> moves = new HashSet<>();
 
     public int getPartyMonID() {
         return partyMonID;
